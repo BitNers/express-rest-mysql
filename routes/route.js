@@ -1,13 +1,14 @@
-const db = require('../database/db_connect');
 module.exports = (app)=>{
-
-    app.use('/', async (req,res,next)=>{
+    const userControl = require("../controllers/user.controller");
+    
+    app.get('/', async (req,res,next)=>{
         res.json({status: true});
         next();
     })
 
-    app.use('/getAllUsers', async(req,res,next)=>{
-       
-    })
+    app.post('/', userControl.createUser)
+    app.get('/users', userControl.findAllUsers)
+    app.get('/users/:name', userControl.findByName)
+    // app.get('/users/:id', userControl.encontrarPorId)
 
 }
