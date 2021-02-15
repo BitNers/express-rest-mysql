@@ -3,7 +3,7 @@ const db = require('../database/models');
 const User = db.User;
 
 exports.findAllUsers = (req, res) => {
-   User.findAll({attributes: {exclude: ['passwd']}})
+   User.findAll({attributes: {exclude: ['passwd']}, limit:250})
    .then(users=>{res.json(users);})
    .catch(err=>{res.status(500).json({status: "error", message: err || "Something went wrong while try to find all users."})})
 };
@@ -18,17 +18,14 @@ exports.findById = (req,res)=>{
          .catch(err=>{res.status(500).json({status: "error", message: err || "Something went wrong while try to find user by name."})});
 }
 
+
 exports.createUser = (req,res)=>{
-    if (!req.body.username || !req.body.passwd || !req.body.email) {res.status(400).json({status: "err",message: "User and Password cannot be empty!"});
-        return;
-      }
-      const user = {
-          username: req.body.username,
-          passwd: bcrypt.hashSync(req.body.passwd, 8),
-          email: req.body.email
+      const {username, passwd, email } = req.body;
+      if(!username || !passwd || !email){
+        res.status(400).json({status: "err",message: "You must fill all these fields: Email, Username and Password."});
       }
 
-      User.create(user)
+      User.create({username, passwd, email})
       .then(data=>{res.json({status: "ok", message: "User was created."})})
-      .catch(err=>{res.status(500).json({status: "error", message: err || "Something went wrong while creating the new user"})});
+      .catch(err=>{res.status(500).json({status: "error", message: "Something went wrong while creating the new user"})});
 }
