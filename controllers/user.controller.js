@@ -1,31 +1,29 @@
-const bcrypt = require('bcrypt');
 const db = require('../database/models');
+const jwt = require('jsonwebtoken');
 const User = db.User;
 
-exports.findAllUsers = (req, res) => {
-   User.findAll({attributes: {exclude: ['passwd']}, limit:250})
-   .then(users=>{res.json(users);})
-   .catch(err=>{res.status(500).json({status: "error", message: err || "Something went wrong while try to find all users."})})
-};
 
-exports.findById = (req,res)=>{
-    const id = req.params.id;
-    User.findOne({
-        where: {id_user: id}, 
-        attributes: {
-            exclude: ['passwd']}})
-         .then(data=>{res.json(data)})
-         .catch(err=>{res.status(500).json({status: "error", message: err || "Something went wrong while try to find user by name."})});
-}
+exports.deleteUser = async (req,res)=>{
+    let user = jwt.verify(req.cookies['access-token'], process.env.ACCESS_TOKEN_SECRET)
+    await User.destroy({where: {id_user: user.id_user}})
+    .then(data=>{res.json({status: "ok", message: "Your account was deleted."}).clearCookie('access-token')})
+    .catch(err=>{res.status(500).json({status: "error", message: "Something went wrong while deleting the user."})});
+  }
+  
 
-
-exports.createUser = (req,res)=>{
-      const {username, passwd, email } = req.body;
-      if(!username || !passwd || !email){
-        res.status(400).json({status: "err",message: "You must fill all these fields: Email, Username and Password."});
-      }
-
-      User.create({username, passwd, email})
-      .then(data=>{res.json({status: "ok", message: "User was created."})})
-      .catch(err=>{res.status(500).json({status: "error", message: "Something went wrong while creating the new user"})});
-}
+  exports.findAllUsers = async (req, res) => {
+    await User.findAll({attributes: {exclude: ['passwd']}, limit:250})
+    .then(users=>{res.json(users);})
+    .catch(err=>{res.status(500).json({status: "error", message: err || "Something went wrong while try to find all users."})})
+ };
+ 
+ exports.getInfo = async (req,res)=>{
+     let user = jwt.verify(req.cookies['access-token'], process.env.ACCESS_TOKEN_SECRET)
+     await User.findOne({
+         where: {id_user: user.id_user}, 
+         attributes: {
+             exclude: ['passwd', 'login_token']}})
+          .then(data=>{res.json(data)})
+          .catch(err=>{res.status(500).json({status: "error", message: "Something went wrong while try to find user by name."})});
+ }
+ 
