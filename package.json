@@ -6,7 +6,9 @@
   "dependencies": {
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
+    "dotenv-safe": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.2.5",
     "sequelize": "^6.5.0",
     "sequelize-cli": "^6.2.0"
@@ -16,7 +18,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "boot": "npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:all && npm start"
   },
   "keywords": [],
   "author": "BitNers",
