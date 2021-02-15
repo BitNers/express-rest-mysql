@@ -14,13 +14,13 @@ module.exports = (sequelize, Sequelize) =>{
         email: {
             type: Sequelize.STRING,
             allowNull: false,
-            unique: true
+            unique: true,
+            isEmail: true
         },
         passwd: {
             type: Sequelize.STRING,
             allowNull: false
         },
-
-    })
+    });
     return User;
 };
