@@ -10,6 +10,6 @@ Required tecnologies:
 - Docker
 
 ## 📃 Todo List
-[ ] Check for User Insert Validation
-[ ] Create Sessions using JWT.
-[ ] Optimize some functions to a better design code pattern.
+- [ ] Check for User Insert Validation
+- [ ] Create Sessions using JWT.
+- [ ] Optimize some functions to a better design code pattern.
