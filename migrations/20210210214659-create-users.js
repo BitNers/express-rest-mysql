@@ -25,12 +25,26 @@ module.exports = {
           allowNull: false,
           unique: true,
           isEmail: true
-      }
-      
+      },
+      token: {
+        type: Sequelize.STRING,
+        allowNull: true,
+    },
+      createdAt:{
+        type: 'TIMESTAMP',
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        allowNull: false
+     },
+       updatedAt:{
+        type: 'TIMESTAMP',
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+        allowNull: false
+    }
 
-  });
-    return User;
-  },
+
+    });
+    
+},
 
   
   down: queryInterface => queryInterface.dropTable('users'),
