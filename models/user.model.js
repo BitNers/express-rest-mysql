@@ -15,7 +15,20 @@ module.exports = (sequelize, Sequelize) =>{
             type: Sequelize.STRING,
             allowNull: false,
             unique: true,
-            isEmail: true
+            validate: {
+                isEmail: true
+            }
+            
+        },
+        role: {
+            type: Sequelize.ENUM({values: ['0', '1', '2', '3']}),
+            defaultValue: '0',
+            allowNull: false,
+          },
+    
+          login_token: {
+            type: Sequelize.STRING,
+            allowNull: true,
         },
         passwd: {
             type: Sequelize.STRING,
