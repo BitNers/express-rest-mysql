@@ -4,13 +4,13 @@ This repository is a bootcamp to understand and study an Express RESTful API usi
 
 Required tecnologies:
 - NodeJS with Express Framework
-    - Upgradable for Front-End using React or Vue.
+    - Upgradable for Front-End using EJS, Materialize, React and Vue.
 - Json Web Token (JWT)
 - MySQL 8
 - Docker
 
 ## 📃 Todo List
 - [x] Check for User Insert Validation (E-mail Validation Fixed).
-- [x] Create Sessions using JWT.
+- [x] Update Sessions Concepts using Express-Session instead JWT.
 - [ ] Create Views using EJS and Materialize.
-- [ ] Optimize some functions to a better design code pattern.
+- [ ] Create API Keys for Users.
