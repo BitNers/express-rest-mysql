@@ -38,7 +38,7 @@ module.exports = {
         allowNull: false,
       },
 
-      token: {
+      apitoken: {
         type: Sequelize.STRING,
         allowNull: true,
       },

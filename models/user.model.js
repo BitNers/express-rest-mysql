@@ -26,7 +26,7 @@ module.exports = (sequelize, Sequelize) =>{
             allowNull: false,
           },
     
-          token: {
+          apitoken: {
             type: Sequelize.STRING,
             allowNull: true,
         },
