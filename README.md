@@ -12,5 +12,4 @@ Required tecnologies:
 ## 📃 Todo List
 - [x] Check for User Insert Validation (E-mail Validation Fixed).
 - [x] Update Sessions Concepts using Express-Session instead JWT.
-- [ ] Create Views using EJS and Materialize.
-- [ ] Create API Keys for Users.
+- [x] Optimize and Security Upgraded: added Helmet, Cors, Encrypted Sessions and Compression GZIP in requests.
