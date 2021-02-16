@@ -26,7 +26,7 @@ module.exports = (sequelize, Sequelize) =>{
             allowNull: false,
           },
     
-          login_token: {
+          token: {
             type: Sequelize.STRING,
             allowNull: true,
         },

@@ -1,16 +1,16 @@
 const jwt = require('jsonwebtoken');
+const db = require('../database/models');
+const User = db.User;
 
-exports.alreadyLogged = (req,res,next)=>{
+exports.alreadyLogged = async (req,res,next)=>{
+    let token = await User.findOne({
+        where: {token: req.cookies['access-token']},
+        attributes: {
+            exclude: ['id_user', 'email', 'passwd', 'username', 'createdAt', 'updatedAt','role']}
+    });   
 
-    let token = req.cookies['access-token']
-
-    if(!token)
+    if(token.token == '')
         return res.redirect('/');
+    next();
 
-
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err,decode)=>{
-        if(err)
-            return res.status(500).json({status: "ok", message:err||"Server Error Handling."})
-        next();
-    });
 };

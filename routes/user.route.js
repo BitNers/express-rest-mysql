@@ -4,8 +4,8 @@ module.exports = (app)=>{
     const Auth = require('../middleware/auth.middleware');
     app.use('/profile', Auth.alreadyLogged);
     
+    app.get('/profile/logout', userControl.logout);
     app.get('/profile', userControl.getInfo);
-    app.delete('/profile/delete', userControl.deleteUser);
-
-
+    
+    
 }

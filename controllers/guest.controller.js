@@ -33,7 +33,7 @@ exports.validateLogin = async (req, res) => {
         if(await bcrypt.compare(passwd, usr.passwd)){
             const access = jwt.sign({id_user: usr.id_user}, process.env.ACCESS_TOKEN_SECRET);
             await User.update(
-               {login_token: access},
+               {token: access},
                {where: {email: email}})
 
             res.cookie("access-token", access, {httpOnly: true, secure: false}); // Secure: True (HTTPS)
