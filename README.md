@@ -10,6 +10,6 @@ Required tecnologies:
 - Docker
 
 ## 📃 Todo List
-- [x] Check for User Insert Validation (E-mail Validation Fixed).
-- [x] Update Sessions Concepts using Express-Session instead JWT.
-- [x] Optimize and Security Upgraded: added Helmet, Cors, Encrypted Sessions and Compression GZIP in requests.
+- [ ] Create Views for Endpoints using EJS and Materialize.
+- [ ] Create an interface for users access API, using JWT.
+- [ ] Thinking about new ideas for project (Data (Text, Image, Video) Saver maybe?)
