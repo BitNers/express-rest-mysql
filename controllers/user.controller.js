@@ -7,18 +7,11 @@ function decodeJwt(txt){
 }
 
 exports.logout = async (req,res)=>{
-  let user = decodeJwt(req.cookies['access-token']);
-  await User.update({token: ""},{where: {id_user: user.id_user}})
-  res.clearCookie('access-token').redirect('/');
+  if(req.session){
+    req.session.destroy(); 
+  }
+  return res.redirect('/');
 }
-
-/* exports.deleteUser = async (req,res)=>{
-  let user = decodeJwt(req.cookies['access-token']);
-    await User.destroy({where: {id_user: user.id_user}})
-    .then(data=>{res.json({status: "ok", message: "Your account was deleted."}).clearCookie('access-token')})
-    .catch(err=>{res.status(500).json({status: "error", message: "Something went wrong while deleting the user."})});
-  }*/
-  
 
 exports.findAllUsers = async (req, res) => {
     await User.findAll({attributes: {exclude: ['passwd']}, limit:250})
@@ -29,11 +22,13 @@ exports.findAllUsers = async (req, res) => {
  
 
 exports.getInfo = async (req,res)=>{
-  let user = decodeJwt(req.cookies['access-token']);
-     await User.findOne({
-         where: {id_user: user.id_user}, 
+  if(!req.session)
+    return res.redirect('/');
+
+  await User.findOne({
+         where: {email: req.session.email}, 
          attributes: {
-             exclude: ['passwd', 'token']}})
+             exclude: ['passwd', 'apitoken']}})
           .then(data=>{res.json(data)})
           .catch(err=>{res.status(500).json({status: "error", message: "Something went wrong while try to find user by name."})});
  }
