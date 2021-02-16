@@ -11,5 +11,7 @@ Required tecnologies:
 
 ## 📃 Todo List
 - [ ] Create Views for Endpoints using EJS and Materialize.
+- [ ] Using LRU-Cache to optimize caching views.
+- [ ] Organize app.js (Separate requires and application configurations).
 - [ ] Create an interface for users access API, using JWT.
 - [ ] Thinking about new ideas for project (Data (Text, Image, Video) Saver maybe?)
