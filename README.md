@@ -10,8 +10,7 @@ Required tecnologies:
 - Docker
 
 ## 📃 Todo List
-
-[x] Check for User Insert Validation (E-mail Validation Fixed).
-[x] Create Sessions using JWT.
-[ ] Create Views using EJS and Materialize.
-[ ] Optimize some functions to a better design code pattern.
+- [x] Check for User Insert Validation (E-mail Validation Fixed).
+- [x] Create Sessions using JWT.
+- [ ] Create Views using EJS and Materialize.
+- [ ] Optimize some functions to a better design code pattern.
