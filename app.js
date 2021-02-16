@@ -4,17 +4,30 @@ const bodyparser = require('body-parser');
 const cookies = require('cookie-parser');
 const helmet = require('helmet');
 const cors = require('cors');
+const path = require('path');
+const expressLayouts = require('express-ejs-layouts')
 const compression = require('compression');
 
 const dbConfig = require('./database/db.config')
-
 
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 
 require('dotenv').config();
 
-app.use(compression(1));
+
+app.set('view engine', 'ejs');
+app.use(expressLayouts);
+app.set('views', path.join(__dirname, '/views'));
+app.use(exp.static(__dirname + '/node_modules'));
+// app.use(exp.static(__dirname+'/public')); Mix Webpack? Maybe
+
+
+// Cache for EJS 
+// LRU = require('lru-cache');
+// ejs.cache = LRU(100);
+
+app.use(compression(9)); // -1 -- 9 -> Lower is better for weak computers.
 app.use(bodyparser.json({limit: '50mb'}));
 app.use(cookies());
 app.use(helmet());
@@ -45,11 +58,7 @@ app.use(session({
     saveUninitialized: false // Don't Forget to Add Secure Cookie in HTTPS
 }));
 
-
 require('./routes/home.route')(app);
 require('./routes/user.route')(app);
 
-
-app.listen(process.env.PORT, ()=>{
-    console.log(`Running in http://127.0.0.1:${process.env.PORT}`)
-});
+app.listen(process.env.PORT, ()=>{console.log(`Running in http://127.0.0.1:${process.env.PORT}`)});
