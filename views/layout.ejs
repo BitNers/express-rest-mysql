@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="materialize-css/dist/css/materialize.min.css">
+    <script src="jquery/dist/jquery.min.js"> </script>
+    <script src="materialize-css/dist/js/materialize.min.js"> </script>
+    <title><%= process.env.APP_NAME%> - <%= title %></title>
+</head>
+<style>
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+  
+</style>
+<body>
+   <header>
+       <nav class="navbar orange darken-2">
+           <ul class="nav navbar-nav">
+               <li><a href="/">Home</a></li>
+               <li><a href="/about">About</a></li>
+               <li><a href="/contact">Contact</a></li>
+           </ul>
+       </nav>
+   </header>
+
+   <main>
+       <div class="container">
+           <%- body %>
+       </div>
+   </main>
+</body>
+<footer class="page-footer sticky orange darken-2">
+    <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text"><%= process.env.APP_NAME%></h5>
+            <p class="grey-text text-lighten-4">This is just a simple bootcamp project using stack: Node, MySQL and React (Not implement yet).</p>
+            <p class="grey-text text-lighten-4">Feel free to check <a href="https://github.com/BitNers/express-rest-mysql" target="_blank">this project</a> on my Github.</p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="https://github.com/BitNers" target="_blank">Github</a></li>
+              <li><a class="grey-text text-lighten-3" href="https://www.linkedin.com/in/wesleysilva2/" target="_blank">Linkedin</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">About project</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container center">
+        © <%= new Date().getFullYear(); %> <%= process.env.APP_NAME%>
+        
+        </div>
+      </div>
+</footer>
+</html>
