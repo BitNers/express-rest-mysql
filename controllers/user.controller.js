@@ -22,14 +22,10 @@ exports.findAllUsers = async (req, res) => {
  
 
 exports.getInfo = async (req,res)=>{
-  if(!req.session)
-    return res.redirect('/');
-
   await User.findOne({
          where: {email: req.session.email}, 
          attributes: {
              exclude: ['passwd', 'apitoken']}})
-          .then(data=>{res.json(data)})
+          .then(data=>{res.render('pages/profile/homeprofile', {data:{title: "Profile", data: data}}); })
           .catch(err=>{res.status(500).json({status: "error", message: "Something went wrong while try to find user by name."})});
  }
- 

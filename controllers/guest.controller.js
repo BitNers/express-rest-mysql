@@ -17,7 +17,8 @@ exports.createUser = async (req,res)=>{
 exports.validateLogin = async (req, res) => {
         if(req.session.email)
             return res.redirect('/profile');
-            
+        
+        
         const {email, passwd} = req.body;
         if(!email || !passwd)
             return res.status(401).json({status: 'error', message: 'Missing required email or password fields'});
@@ -35,7 +36,7 @@ exports.validateLogin = async (req, res) => {
         if(await bcrypt.compare(passwd, usr.passwd)){
             let sess = req.session;
             sess.email = email;
-            res.send({status: "ok", message: "User authenticated"});
+            res.redirect('/profile');
             // const access = jwt.sign({id_user: usr.id_user}, process.env.ACCESS_TOKEN_SECRET);
             // await User.update({token: access},{where: {email: email}})
             // res.cookie("access-token", access, {httpOnly: true, secure: false}); // Secure: True (HTTPS)
