@@ -1,18 +1,28 @@
+//Express Core
 const exp = require('express');
 const app = exp();
+
+// Body and Cookie Parser
 const bodyparser = require('body-parser');
 const cookies = require('cookie-parser');
+
+// Security and optimization
 const helmet = require('helmet');
 const cors = require('cors');
-const path = require('path');
-const expressLayouts = require('express-ejs-layouts')
 const compression = require('compression');
-
+const LRU = require('lru-cache');
+// Database & Sessions
 const dbConfig = require('./database/db.config')
-
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 
+// Views
+let ejs = require('ejs');
+ejs.cache = new LRU(100);
+const expressLayouts = require('express-ejs-layouts')
+
+// Utilities
+const path = require('path');
 require('dotenv').config();
 
 
@@ -20,14 +30,10 @@ app.set('view engine', 'ejs');
 app.use(expressLayouts);
 app.set('views', path.join(__dirname, '/views'));
 app.use(exp.static(__dirname + '/node_modules'));
-// app.use(exp.static(__dirname+'/public')); Mix Webpack? Maybe
-
-
-// Cache for EJS 
-// LRU = require('lru-cache');
-// ejs.cache = LRU(100);
+app.use('*/public', exp.static(__dirname+'/public')); 
 
 app.use(compression(9)); // -1 -- 9 -> Lower is better for weak computers.
+app.use(bodyparser.urlencoded({ extended: false }))
 app.use(bodyparser.json({limit: '50mb'}));
 app.use(cookies());
 app.use(helmet());
@@ -58,7 +64,12 @@ app.use(session({
     saveUninitialized: false // Don't Forget to Add Secure Cookie in HTTPS
 }));
 
-require('./routes/home.route')(app);
+// Adding this tiny middleware to get Session Info and pass through View to make conditionals CSS buttons
+app.use((req, res, next)=>{
+	res.locals.email = req.session.email;
+    next();
+})
+require('./routes/guest.route')(app);
 require('./routes/user.route')(app);
 
 app.listen(process.env.PORT, ()=>{console.log(`Running in http://127.0.0.1:${process.env.PORT}`)});
