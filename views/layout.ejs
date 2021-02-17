@@ -5,40 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="materialize-css/dist/css/materialize.min.css">
-    <script src="jquery/dist/jquery.min.js"> </script>
-    <script src="materialize-css/dist/js/materialize.min.js"> </script>
-    <title><%= process.env.APP_NAME%> - <%= title %></title>
+    <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet">
+    <title><%= process.env.APP_NAME%> - <%= data.title %></title>
 </head>
 <style>
-  body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
-
-  main {
-    flex: 1 0 auto;
-  }
-  
+  body {display: flex;min-height: 100vh;flex-direction: column;}
+  main {flex: 1 0 auto;}
 </style>
 <body>
    <header>
-       <nav class="navbar orange darken-2">
-           <ul class="nav navbar-nav">
-               <li><a href="/">Home</a></li>
-               <li><a href="/about">About</a></li>
-               <li><a href="/contact">Contact</a></li>
-           </ul>
-       </nav>
+    <nav>
+      <div class="nav-wrapper  deep-purple darken-2">
+        <a href="/" class="brand-logo">&nbsp;<%= process.env.APP_NAME%></a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="lni lni-menu"></i></a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="/#"><i class="lni lni-quotation"></i> About it</a></li>
+          <li><a href="/#"><i class="lni lni-comments-alt"></i> Contact</a></li>
+          <% if (locals.email){ %>
+            <li><a href="/profile"><i class="lni lni-dashboard"></i> My Profile</a></li>
+            <li><a href="/profile/logout"><i class="lni lni-power-switch"></i> Logout</a></li>
+          <% }else{ %>
+            <li><a href="/#"><i class="lni lni-enter"></i> Sign-up</a></li>
+            <li><a href="/login"><i class="lni lni-user"></i> Login</a></li>
+          <%  } %>
+        </ul>
+      </div>
+    </nav>
+    <ul class="sidenav" id="mobile-demo">
+      <li><a href="/#"><i class="lni lni-quotation"></i> About it</a></li>
+      <li><a href="/#"><i class="lni lni-comments-alt"></i>  Contact</a></li>
+      <% if (locals.email){ %>
+        <li><a href="/profile"><i class="lni lni-dashboard"></i> My Profile</a></li>
+        <li><a href="/profile/logout"><i class="lni lni-power-switch"></i> Logout</a></li>
+      <% }else{ %>
+        <li><a href="/#"><i class="lni lni-enter"></i> Sign-up</a></li>
+        <li><a href="/login"><i class="lni lni-user"></i> Login</a></li>
+      <%  } %>
+    </ul>
    </header>
-
-   <main>
-       <div class="container">
-           <%- body %>
-       </div>
+   <main> 
+        <%- body %>
    </main>
-</body>
-<footer class="page-footer sticky orange darken-2">
+   <footer class="page-footer  deep-purple darken-4">
     <div class="container">
         <div class="row">
           <div class="col l6 s12">
@@ -47,11 +55,11 @@
             <p class="grey-text text-lighten-4">Feel free to check <a href="https://github.com/BitNers/express-rest-mysql" target="_blank">this project</a> on my Github.</p>
           </div>
           <div class="col l4 offset-l2 s12">
-            <h5 class="white-text">Links</h5>
+            <h5 class="white-text">Some Links</h5>
             <ul>
-              <li><a class="grey-text text-lighten-3" href="https://github.com/BitNers" target="_blank">Github</a></li>
-              <li><a class="grey-text text-lighten-3" href="https://www.linkedin.com/in/wesleysilva2/" target="_blank">Linkedin</a></li>
-              <li><a class="grey-text text-lighten-3" href="#!">About project</a></li>
+              <li><a class="grey-text text-lighten-3" href="https://github.com/BitNers" target="_blank"><i class="lni lni-github-original"></i> My GitHub</a></li>
+              <li><a class="grey-text text-lighten-3" href="https://www.linkedin.com/in/wesleysilva2/" target="_blank"><i class="lni lni-linkedin-original"></i> My Linkedin</a></li>
+              <li><a class="grey-text text-lighten-3" href="https://github.com/BitNers/express-rest-mysql" target="_blank"><i class="lni lni-git"></i> About this project</a></li>
             </ul>
           </div>
         </div>
@@ -59,8 +67,11 @@
       <div class="footer-copyright">
         <div class="container center">
         © <%= new Date().getFullYear(); %> <%= process.env.APP_NAME%>
-        
         </div>
       </div>
-</footer>
+    </footer>
+  </body>
+  <script src="jquery/dist/jquery.min.js"> </script>
+  <script src="materialize-css/dist/js/materialize.min.js"> </script>
+  <script src="public/assets/js/layout.js"> </script>
 </html>
