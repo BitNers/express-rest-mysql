@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="materialize-css/dist/css/materialize.min.css">
     <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet">
+    <link rel="icon" href="public/assets/images/favicon.png">
     <title><%= process.env.APP_NAME%> - <%= data.title %></title>
 </head>
 <style>
-  body {display: flex;min-height: 100vh;flex-direction: column;}
+  body {display: flex; min-height: 100vh; flex-direction: column;}
   main {flex: 1 0 auto;}
 </style>
 <body>
    <header>
     <nav>
-      <div class="nav-wrapper  deep-purple darken-2">
+      <div class="nav-wrapper sticky-top deep-purple darken-2">
         <a href="/" class="brand-logo">&nbsp;<%= process.env.APP_NAME%></a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="lni lni-menu"></i></a>
         <ul class="right hide-on-med-and-down">
