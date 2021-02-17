@@ -25,7 +25,7 @@ exports.getInfo = async (req,res)=>{
   await User.findOne({
          where: {email: req.session.email}, 
          attributes: {
-             exclude: ['passwd', 'apitoken']}})
+             exclude: ['passwd']}})
           .then(data=>{res.render('pages/profile/homeprofile', {data:{title: "Profile", data: data}}); })
           .catch(err=>{res.status(500).json({status: "error", message: "Something went wrong while try to find user by name."})});
  }
