@@ -1,7 +1,7 @@
 {
-  "name": "express-rest-api",
+  "name": "hoarde",
   "version": "1.1.0",
-  "description": "CRUD with Express and MySQL",
+  "description": "Data Hoard with Express, scalable with S3",
   "main": "app.js",
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -19,11 +19,14 @@
     "jquery": "^3.5.1",
     "jsonwebtoken": "^8.5.1",
     "lru-cache": "^6.0.0",
+    "maskdata": "^1.1.4",
     "materialize-css": "^1.0.0",
+    "multer": "^1.4.2",
     "mysql2": "^2.2.5",
     "sequelize": "^6.5.0",
     "sequelize-cli": "^6.2.0",
-    "validator": "^13.5.2"
+    "validator": "^13.5.2",
+    "vue": "^2.6.12"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
