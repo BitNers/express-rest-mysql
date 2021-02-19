@@ -9,4 +9,8 @@ module.exports = (app)=>{
     app.route('/login')
     .get(auth.AlreadyLogged,async (req,res)=>{res.render('pages/Login', {data:{title:"Login"}})})
     .post(guestControl.validateLogin);
+
+    app.route('/signup')
+    .get(auth.AlreadyLogged, async(req,res)=>{res.render('pages/signup', {data: {title: "Sign-up"}})})
+    .post(guestControl.createUser);
 }
