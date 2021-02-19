@@ -11,18 +11,23 @@ const helmet = require('helmet');
 const cors = require('cors');
 const compression = require('compression');
 const LRU = require('lru-cache');
+
+//Storage
+const multer = require('multer');
+const upload = multer({dest: 'uploads/'});
+
 // Database & Sessions
 const dbConfig = require('./database/db.config')
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 
 // Views
-let ejs = require('ejs');
-ejs.cache = new LRU(100);
+let ejs = require('ejs'); ejs.cache = new LRU(100);
 const expressLayouts = require('express-ejs-layouts')
 
 // Utilities
 const path = require('path');
+const pjson = require('./package.json');
 require('dotenv').config();
 
 
@@ -67,9 +72,12 @@ app.use(session({
 // Adding this tiny middleware to get Session Info and pass through View to make conditionals CSS buttons
 app.use((req, res, next)=>{
 	res.locals.email = req.session.email;
+	res.locals.version = pjson.version;
     next();
 })
 require('./routes/guest.route')(app);
 require('./routes/user.route')(app);
+require('./routes/bunker.route')(app);
+
 
 app.listen(process.env.PORT, ()=>{console.log(`Running in http://127.0.0.1:${process.env.PORT}`)});
