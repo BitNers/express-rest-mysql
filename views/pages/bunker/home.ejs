@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="public/assets/images/favicon.png">
+    <link rel="stylesheet" href="public/assets/css/materialize.min.css">
+    <link rel="stylesheet" href="public/assets/css/bunker.css">
+    <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet">
+    <title><%= process.env.APP_NAME %> - Bunker</title>
+</head>
+<body>
+    <ul id="slide-out" class="sidenav">
+        <li>
+            <div class="user-view">
+          <span class="black-text name">John Doe</span>               
+        </div></li>
+        <li><div class="divider"></div></li>
+        <li><a href="/profile/bunker/details"><i class="lni lni-dashboard"></i> Details of Bunker</a></li>
+        <li><a href="/profile/bunker/download"><i class="lni lni-download"></i> Download your Data</a></li>
+        <li><div class="divider"></div></li>
+        <li><a class="waves-effect" href="/profile"><i class="lni lni-close"></i>Close Bunker</a></li>
+    </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                  <nav>
+                    <div class="nav-wrapper">
+                        <i class="sidenav-trigger lni lni-menu" data-target="slide-out"> </i>
+                    </div>
+                  </nav>
+                <div class="row">
+                    <div class="col s12">
+                       <h2>Form Inline</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                       <h2>File Info</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+   
+</body>
+  <script src="public/assets/js/jquery.min.js"> </script>
+  <script src="public/assets/js/materialize.min.js"> </script>
+  <script src="public/assets/js/bunker.js"> </script>
+</html>
