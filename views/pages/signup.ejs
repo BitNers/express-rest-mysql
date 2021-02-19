@@ -1,0 +1,58 @@
+<%- contentFor("body") %>
+<br/><br/><br/>
+<div class="valign-wrapper" style="margin: 0 auto; width:100%;height:100%;">
+    <div class="valign" style="width:100%;">
+        <div class="container">
+           <div class="row">
+              <div class="col s12 m6 offset-m3">
+                 <div class="card">
+                    <div class="card-content">
+                       <span class="card-title center-align black-text">Register</span>
+                       <form action="/signup" method="POST">
+                        <div class="row">
+                            <div class="input-field col s12">
+                               <i class="lni lni-user prefix"></i>
+                               <input placeholder="Your Username" id="email" name="username" type="text" class="validate" required>
+                               <label for="email" class="active">Username</label>
+                            </div>
+                         </div>
+                          <div class="row">
+                             <div class="input-field col s12">
+                                <i class="lni lni-envelope prefix"></i>
+                                <input placeholder="Your E-mail" id="email" name="email" type="email" class="validate" required>
+                                <label for="email" class="active">E-mail</label>
+                             </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                               <i class="lni lni-envelope prefix"></i>
+                               <input placeholder="Confirm your E-mail" id="email" name="email_confirm" type="email" class="validate" required>
+                               <label for="email" class="active">Confirm e-mail</label>
+                            </div>
+                         </div>
+                          <div class="row">
+                             <div class="input-field col s6">
+                                <i class="lni lni-lock prefix"></i>
+                                <input placeholder="Your Password" id="password" name="passwd" type="password"  class="validate" required>
+                                <label for="password" class="active">Password</label>
+                             </div>   
+                             <div class="input-field col s6">
+                                <i class="lni lni-lock prefix"></i>
+                                <input placeholder="Confirm your Password" id="password" name="passwd_confirm" type="password"  class="validate" required>
+                                <label for="password" class="active">Confirm password</label>
+                             </div>
+                          </div>
+                          <br/>
+                          <div class="row">
+                            <center>
+                                <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Get in! <i class="lni lni-pointer"></i> </button>
+                            </center>
+                          </div>
+                       </form>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+    </div>
+</div>
