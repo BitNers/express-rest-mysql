@@ -10,7 +10,7 @@
     <title><%= process.env.APP_NAME%> - <%= data.title %></title>
 </head>
 <style>
-  body {display: flex; min-height: 100vh; flex-direction: column;}
+  body {display: flex; min-height: 100vh; flex-direction: column; }
   main {flex: 1 0 auto;}
 </style>
 <body>
@@ -21,12 +21,12 @@
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="lni lni-menu"></i></a>
         <ul class="right hide-on-med-and-down">
           <li><a href="/#"><i class="lni lni-quotation"></i> About it</a></li>
-          <li><a href="/#"><i class="lni lni-comments-alt"></i> Contact</a></li>
+          <li><a href="/#"><i class="lni lni-question-circle"></i> Neep help?</a></li>
           <% if (locals.email){ %>
             <li><a href="/profile"><i class="lni lni-dashboard"></i> My Profile</a></li>
-            <li><a href="/profile/logout"><i class="lni lni-power-switch"></i> Logout</a></li>
+            <li><a href="/profile/bunker"><i class="lni lni-database"></i> Bunker</a></li>
           <% }else{ %>
-            <li><a href="/#"><i class="lni lni-enter"></i> Sign-up</a></li>
+            <li><a href="/signup"><i class="lni lni-enter"></i> Sign-up</a></li>
             <li><a href="/login"><i class="lni lni-user"></i> Login</a></li>
           <%  } %>
         </ul>
@@ -34,12 +34,12 @@
     </nav>
     <ul class="sidenav" id="mobile-demo">
       <li><a href="/#"><i class="lni lni-quotation"></i> About it</a></li>
-      <li><a href="/#"><i class="lni lni-comments-alt"></i>  Contact</a></li>
+      <li><a href="/#"><i class="lni lni-question-circle"></i> Neep help?</a></li>
       <% if (locals.email){ %>
         <li><a href="/profile"><i class="lni lni-dashboard"></i> My Profile</a></li>
-        <li><a href="/profile/logout"><i class="lni lni-power-switch"></i> Logout</a></li>
+        <li><a href="/profile/bunker"><i class="lni lni-database"></i> Bunker</a></li>
       <% }else{ %>
-        <li><a href="/#"><i class="lni lni-enter"></i> Sign-up</a></li>
+        <li><a href="/signup"><i class="lni lni-enter"></i> Sign-up</a></li>
         <li><a href="/login"><i class="lni lni-user"></i> Login</a></li>
       <%  } %>
     </ul>
@@ -52,7 +52,7 @@
         <div class="row">
           <div class="col l6 s12">
             <h5 class="white-text"><%= process.env.APP_NAME%></h5>
-            <p class="grey-text text-lighten-4">This is just a simple bootcamp project using stack: Node, MySQL and React (Not implement yet).</p>
+            <p class="grey-text text-lighten-4">Data Hoarder Backup Online for educationals purposes.</p>
             <p class="grey-text text-lighten-4">Feel free to check <a href="https://github.com/BitNers/express-rest-mysql" target="_blank">this project</a> on my Github.</p>
           </div>
           <div class="col l4 offset-l2 s12">
@@ -67,7 +67,7 @@
       </div>
       <div class="footer-copyright">
         <div class="container center">
-        © <%= new Date().getFullYear(); %> <%= process.env.APP_NAME%>
+        © <%= new Date().getFullYear(); %> <%= process.env.APP_NAME%> (v<%= locals.version%>)
         </div>
       </div>
     </footer>
