@@ -4,13 +4,16 @@ const db = require('../database/models');
 const User = db.User;
 
 exports.createUser = async (req,res)=>{
-    const {username, passwd, email } = req.body;
-    if(!username || !passwd || !email)
-        return res.status(400).json({status: "err",message: "You must fill all these fields: Email, Username and Password."});
+    const {username, passwd, passwd_confirm, email, email_confirm} = req.body;
+    if(!username || !passwd || !email || !passwd_confirm || !email_confirm)
+        return res.render('pages/signup', {data: {title: 'Login', data: '', err: "You must fill all fields."}});
+       // return res.status(400).json({status: "err",message: "You must fill all these fields: Email, Username and Password."});
+    if (passwd != passwd_confirm || email != email_confirm)
+        return res.render('pages/signup', {data: {title: 'Login', data: '', err: "The email or password doesn't match."}});
     
     let senha = await bcrypt.hash(passwd,8);
     await User.create({username, passwd: senha, email})
-    .then(data=>{res.json({status: "ok", message: "User was created."})})
+    .then(data=>{res.render('pages/login', {data: {title: 'Login', data: '', err: "", success: "Your account was created, try it now!"} })})
     .catch(err=>{res.status(500).json({status: "error", message: "Something went wrong while creating the new user."})});
 }
 
@@ -31,7 +34,7 @@ exports.validateLogin = async (req, res) => {
         })
         
         if(!usr)
-            return res.status(404).json({status: 'error', message: 'This Email does not exist.'});
+            return res.render('pages/login', {data: {title: 'Login', data: '', err: "This account doesn't exist. Create a new one!"}});
   
         if(await bcrypt.compare(passwd, usr.passwd)){
             let sess = req.session;
@@ -42,6 +45,8 @@ exports.validateLogin = async (req, res) => {
             // res.cookie("access-token", access, {httpOnly: true, secure: false}); // Secure: True (HTTPS)
             
 
-        }else{res.status(401).json({status: "error", message: "Email or password is wrong."});}   
+        }else{
+            res.render('pages/login', {data: {title: 'Login', data:'',  err: "Wrong credentials :("}})
+        }
   
   }
