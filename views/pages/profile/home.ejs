@@ -19,14 +19,15 @@
                               <div class="collapsible-body">
                                  <p><strong>Username:</strong> <%= data.data.username %></p>
                                  <p><strong>E-mail:</strong> <%= data.data.email %> </p>
-                                 <p><strong>Space used: </strong> 50GB (Example) </p>
+                                 <p><strong>Space Used: </strong><%= data.data.sizeFolder.usedSpace %> GB / 5 GB (<%= data.data.sizeFolder.percentSpace %>%)</p>
+                                
                                  <p><strong>Date Creation: </strong><%= data.data.createdAt %> </p><br/>
                                  <p class="right-align">
-                                    <a  class="btn waves-effect right-align waves-light light-green lighten-1" href="/profile/bunker">
+                                    <a  class="btn waves-effect right-align waves-light light-green darken-1" href="/profile/bunker">
                                        <i class="lni lni-database"></i>
                                        <span> Go to Bunker</span>
                                    </a> 
-                                    <a  class="btn waves-effect right-align waves-light red darken-2" href="/profile/Logout">
+                                    <a  class="btn waves-effect right-align waves-light red darken-2" href="/profile/logout">
                                         <i class="lni lni-power-switch"></i>
                                         <span> Logout</span>
                                     </a> 

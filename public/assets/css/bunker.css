@@ -1,10 +1,6 @@
-.container {
-    width: 100%;
-    max-width:initial;
-  }
-  .container > .row {
-    margin: 0;
-  }
-  .container > .row > .col {
-    padding: 0;
-  }
+.container-fluid + .center-align {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}

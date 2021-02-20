@@ -8,43 +8,54 @@
     <link rel="stylesheet" href="public/assets/css/materialize.min.css">
     <link rel="stylesheet" href="public/assets/css/bunker.css">
     <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet">
-    <title><%= process.env.APP_NAME %> - Bunker</title>
+    <title><%= process.env.APP_NAME %> - <%= data.title %></title>
 </head>
 <body>
     <ul id="slide-out" class="sidenav">
         <li>
             <div class="user-view">
-          <span class="black-text name">John Doe</span>               
+          <h3 class="black-text"> <%= data.data.username %></h3>               
         </div></li>
         <li><div class="divider"></div></li>
-        <li><a href="/profile/bunker/details"><i class="lni lni-dashboard"></i> Details of Bunker</a></li>
-        <li><a href="/profile/bunker/download"><i class="lni lni-download"></i> Download your Data</a></li>
-        <li><div class="divider"></div></li>
-        <li><a class="waves-effect" href="/profile"><i class="lni lni-close"></i>Close Bunker</a></li>
+       
     </ul>
-    <div class="container">
+
+    <nav class="deep-purple darken-4">
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo center"> <%= process.env.APP_NAME %></a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <li><a href="/profile/bunker/details"><i class="lni lni-dashboard"></i> Details of Bunker</a></li>
+            <li><a href="/profile/bunker/download"><i class="lni lni-download"></i> Download your Data</a></li>
+            <li><a class="waves-effect" href="/profile"><i class="lni lni-close"></i> Close Bunker</a></li>
+          </ul>
+        </div>
+      </nav>
+      <ul class="sidenav" id="mobile-demo">
+            <li><a href="/profile/bunker/details"><i class="lni lni-dashboard"></i> Details of Bunker</a></li>
+            <li><a href="/profile/bunker/download"><i class="lni lni-download"></i> Download your Data</a></li>
+            <li><a href="/profile"><i class="lni lni-close"></i> Close Bunker</a></li>
+      </ul>
+
+    <div class="container-fluid center-align">
+        <div class="row">
+            <div class="col s12">   
+                  <form action="" method="POST">
+                    <div class="input-field inline">
+                      <input id="email_inline" type="email" class="validate">
+                      <label for="email_inline">Email</label>
+                      <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
+                    </div>
+                  </form>
+            </div>
+
+        </div>
         <div class="row">
             <div class="col s12">
-                  <nav>
-                    <div class="nav-wrapper">
-                        <i class="sidenav-trigger lni lni-menu" data-target="slide-out"> </i>
-                    </div>
-                  </nav>
-                <div class="row">
-                    <div class="col s12">
-                       <h2>Form Inline</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12">
-                       <h2>File Info</h2>
-                    </div>
-                </div>
+                <h3>deftones</h3>
             </div>
         </div>
     </div>
-    
-   
 </body>
   <script src="public/assets/js/jquery.min.js"> </script>
   <script src="public/assets/js/materialize.min.js"> </script>
