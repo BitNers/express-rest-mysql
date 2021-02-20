@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const fs = require('fs'); 
 const bcrypt = require('bcrypt');
 const db = require('../database/models');
 const User = db.User;
@@ -12,9 +13,12 @@ exports.createUser = async (req,res)=>{
         return res.render('pages/signup', {data: {title: 'Login', data: '', err: "The email or password doesn't match."}});
     
     let senha = await bcrypt.hash(passwd,8);
-    await User.create({username, passwd: senha, email})
+    let path_bunker =  `./uploads/${username}_${email.substring(0,3)}`;
+    fs.mkdir(path_bunker, (err)=>{if(err) console.log(err)});
+
+    await User.create({username, passwd: senha, email, path_bunker})
     .then(data=>{res.render('pages/login', {data: {title: 'Login', data: '', err: "", success: "Your account was created, try it now!"} })})
-    .catch(err=>{res.status(500).json({status: "error", message: "Something went wrong while creating the new user."})});
+    .catch(err=>{res.status(500).json({status: "error", message: err||"Something went wrong while creating the new user."})});
 }
 
 exports.validateLogin = async (req, res) => {
