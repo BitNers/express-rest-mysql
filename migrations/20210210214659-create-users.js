@@ -37,6 +37,10 @@ module.exports = {
         defaultValue: '0',
         allowNull: false,
       },
+      path_bunker: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
 
       apitoken: {
         type: Sequelize.STRING,
