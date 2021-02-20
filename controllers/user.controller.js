@@ -1,6 +1,7 @@
 const db = require('../database/models');
 const jwt = require('jsonwebtoken');
 const MaskData = require('maskdata');
+const getSize = require('get-folder-size');
 const User = db.User;
 
 function decodeJwt(txt){
@@ -27,16 +28,26 @@ exports.findAllUsers = async (req, res) => {
     .catch(err=>{res.status(500).json({status: "error", message: err || "Something went wrong while try to find all users."})})
  };
 
- 
-
 exports.getInfo = async (req,res)=>{
+
   await User.findOne({
          where: {email: req.session.email}, 
          attributes: {
              exclude: ['passwd']}})
           .then(data=>{
             data.email = MaskData.maskEmail2(data.email, MaskEmailOption);
-            res.render('pages/profile/home', {data:{title: "Profile", data: data}});
+
+            getSize(data.path_bunker, (err,size)=>{
+              if(!err){
+                let fSize = (size /(1024**3)).toFixed(2);
+                let fPercent = ((fSize/process.env.MAX_FREE_SPACE)*100).toFixed(0);
+
+                data.setDataValue("sizeFolder", {usedSpace: fSize, percentSpace: fPercent});
+
+                res.render('pages/profile/home', {data:{title: "Profile", data: data}});
+              }
+            });
+            
           })
           .catch(err=>{res.status(500).json({status: "error", message: "Something went wrong while try to find user by name."})});
- }
+}
