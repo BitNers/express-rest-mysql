@@ -25,7 +25,10 @@ module.exports = (sequelize, Sequelize) =>{
             defaultValue: '0',
             allowNull: false,
           },
-    
+          path_bunker: {
+            type: Sequelize.STRING,
+            allowNull: true
+          },
           apitoken: {
             type: Sequelize.STRING,
             allowNull: true,
@@ -34,6 +37,7 @@ module.exports = (sequelize, Sequelize) =>{
             type: Sequelize.STRING,
             allowNull: false
         },
+        sizeFolder: {type: Sequelize.VIRTUAL},
     });
     return User;
 };
