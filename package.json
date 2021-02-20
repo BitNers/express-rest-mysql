@@ -15,6 +15,7 @@
     "express-ejs-layouts": "^2.5.0",
     "express-mysql-session": "^2.1.5",
     "express-session": "^1.17.1",
+    "get-folder-size": "^2.0.1",
     "helmet": "^4.4.1",
     "jquery": "^3.5.1",
     "jsonwebtoken": "^8.5.1",
