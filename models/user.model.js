@@ -20,19 +20,21 @@ module.exports = (sequelize, Sequelize) =>{
             }
             
         },
-        role: {
-            type: Sequelize.ENUM({values: ['0', '1', '2', '3']}),
-            defaultValue: '0',
-            allowNull: false,
-          },
-          path_bunker: {
+      
+        path_bunker: {
             type: Sequelize.STRING,
             allowNull: true
           },
-          apitoken: {
+
+        passwd_bunker:{
             type: Sequelize.STRING,
-            allowNull: true,
         },
+        
+        email_verified:{
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
+            },
+
         passwd: {
             type: Sequelize.STRING,
             allowNull: false

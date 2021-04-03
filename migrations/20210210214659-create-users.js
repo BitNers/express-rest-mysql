@@ -32,26 +32,26 @@ module.exports = {
           }
       },
 
-      role: {
-        type: Sequelize.ENUM({values: ['0','1', '2', '3']}),
-        defaultValue: '0',
-        allowNull: false,
-      },
       path_bunker: {
         type: Sequelize.STRING,
         allowNull: true
       },
 
-      apitoken: {
+      passwd_bunker: {
         type: Sequelize.STRING,
         allowNull: true,
+      },
+
+      email_verified:{
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
 
       createdAt:{
         type: 'TIMESTAMP',
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
         allowNull: false
-     },
+      },
 
        updatedAt:{
         type: 'TIMESTAMP',
