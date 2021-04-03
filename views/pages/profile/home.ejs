@@ -14,14 +14,13 @@
                             <li class="active">
                               <div class="collapsible-header center-align purple lighten-5">
                                 <i class="lni lni-user"></i>
-                                Profile Info
+                                Profile Info 
                             </div>
-                              <div class="collapsible-body">
+                              <div class="collapsible-body ">
                                  <p><strong>Username:</strong> <%= data.data.username %></p>
                                  <p><strong>E-mail:</strong> <%= data.data.email %> </p>
-                                 <p><strong>Space Used: </strong><%= data.data.sizeFolder.usedSpace %> GB / 5 GB (<%= data.data.sizeFolder.percentSpace %>%)</p>
-                                
-                                 <p><strong>Date Creation: </strong><%= data.data.createdAt %> </p><br/>
+                                 <p><strong>Space Used: </strong><%= data.data.sizeFolder.usedSpace %> GB / <%= process.env.MAX_FREE_SPACE %> GB (<%= data.data.sizeFolder.percentSpace %>%)</p> 
+                                 <p><strong>Date Creation: </strong><%= data.data.createdAt %> </p>
                                  <p class="right-align">
                                     <a  class="btn waves-effect right-align waves-light light-green darken-1" href="/profile/bunker">
                                        <i class="lni lni-database"></i>
@@ -44,11 +43,49 @@
                                  <ul class="collapsible">
                                     <li>
                                       <div class="collapsible-header"><i class="lni lni-pencil"></i>Update Info</div>
-                                      <div class="collapsible-body"><span>Update E-mail or Password</span></div>
+                                      <div class="collapsible-body">
+                                        <div class="container-fluid">
+                                          <div class="row valign center">
+
+                                            <div class="col s12 l6">
+                                              <h5>Update E-mail</h5>
+                                              <form role="form" method="PATCH">
+                                                <div class="form-group">
+                                                <label for="currentEmail"> Current E-mail</label>
+                                                  <input type="email" name="currentEmail" class="validate"id="currentEmail" required/>
+                                                <label for="newEmail">New E-mail</label>
+                                                  <input type="email" name="newEmail" class="validate" id="newEmail" required />
+                                                </div><br>
+                                                <button type="submit" class="btn light-blue darken-2">Change E-mail</button>
+                                              </form>
+                                            </div>
+
+                                            <div class="col s12 l6">
+                                              <h5>Update Password</h5>
+                                              <form role="form" method="PATCH">
+                                                <div class="form-group">
+                                                <label for="currentPassword">Password</label>
+                                                  <input type="password" name="currentPasswd" class="validate" id="currentPassword" required/>
+                                                <label for="newPassword">New Password</label>
+                                                  <input type="password" name="newPasswd" class="validate" id="newPassword" required/>
+                                                </div><br>
+                                                <button type="submit" class="btn teal darken-2">Change Password</button>
+                                              </form>
+                                            </div>
+
+                                          </div>
+                                        </div>               
+                                      </div>
                                     </li>
                                     <li>
                                       <div class="collapsible-header"><i class="lni lni-shield"></i>Security Account</div>
-                                      <div class="collapsible-body"><span>2FA and E-mail Confirmation</span></div>
+                                      <div class="collapsible-body">
+                                        <% if (!data.data.email_verified) { %>
+                                          <span> Your e-mail is not confirmed yet.</span>
+                                        <% } else { %>
+                                        <span>2FA and E-mail Confirmation</span>
+                                        <% } %>
+                                      </div>
                                     </li>                    
                                   </ul>
                                         
@@ -64,11 +101,34 @@
                                  <ul class="collapsible">
                                     <li>
                                       <div class="collapsible-header"><i class="lni lni-bug"></i> Report an Issue/Bug</div>
-                                      <div class="collapsible-body"><span>Form to send a report</span></div>
+                                      <div class="collapsible-body">
+                                        <div class="container-fluid">
+                                          <div class="row valign center">
+                                            <div class="col s12">
+                                              <h5>Report Issues</h5>
+                                              <div class="text-flow">If you are an User, you can directly send a report by this form down.</div>
+                                              <div class="text-flow">If you are a Developer, please consider to open an issue in <a href="https://github.com/BitNers/express-rest-mysql" target="_blank">Github Repository.</a></div>
+                                              <form role="form" method="PATCH">
+                                                <div class="form-group">
+                                                <label for="currentEmail"> Current E-mail</label>
+                                                  <input type="email" name="currentEmail" class="validate" id="currentEmail" required/>
+                                                  <label for="newEmail">New E-mail</label>
+                                                  <input type="email" name="newEmail" class="validate" id="newEmail" required />
+                                                </div><br>
+                                                <button type="submit" class="btn light-blue darken-2">Change E-mail</button>
+                                              </form>  
+                                            </div>
+
+                                          </div>
+                                        </div>
+                                      </div>
                                     </li>
                                     <li>
-                                      <div class="collapsible-header"><i class="lni lni-dollar"></i> Donates</div>
-                                      <div class="collapsible-body"><span>Cryptowallets here.</span></div>
+                                      <div class="collapsible-header"><i class="lni lni-bitcoin"></i> Donates</div>
+                                      <div class="collapsible-body">
+                                        <strong>Bitcoin </strong>17G6RiHgH7bVoRQzauDzdjLrseXtZYzuKC<br>
+                                        <strong>Ethereum </strong>0x95fa8559d1df513463f1f2161b73b0faff732474
+                                      </div>
                                     </li>                    
                                   </ul>
                                         
