@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="materialize-css/dist/css/materialize.min.css">
-    <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet">
+    <meta name="Description" content="Personal Data Hoarder">
+    <link rel="stylesheet" href="@materializecss/materialize/dist/css/materialize.min.css" defer>
+    <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet" defer>
     <link rel="icon" href="public/assets/images/favicon.png">
     <title><%= process.env.APP_NAME%> - <%= data.title %></title>
 </head>
@@ -52,7 +53,7 @@
         <div class="row">
           <div class="col l6 s12">
             <h5 class="white-text"><%= process.env.APP_NAME%></h5>
-            <p class="grey-text text-lighten-4">Data Hoarder Backup Online for educationals purposes.</p>
+            <p class="grey-text text-lighten-4">Data Hoarder Backup Online for educational purposes.</p>
             <p class="grey-text text-lighten-4">Feel free to check <a href="https://github.com/BitNers/express-rest-mysql" target="_blank">this project</a> on my Github.</p>
           </div>
           <div class="col l4 offset-l2 s12">
@@ -73,6 +74,6 @@
     </footer>
   </body>
   <script src="jquery/dist/jquery.min.js"> </script>
-  <script src="materialize-css/dist/js/materialize.min.js"> </script>
+  <script src="@materializecss/materialize/dist/js/materialize.min.js"> </script>
   <script src="public/assets/js/layout.js"> </script>
 </html>
