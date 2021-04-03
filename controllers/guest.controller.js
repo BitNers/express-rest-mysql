@@ -1,10 +1,14 @@
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 const fs = require('fs'); 
 const bcrypt = require('bcrypt');
 const db = require('../database/models');
 const User = db.User;
 
 exports.createUser = async (req,res)=>{
+    if(req.session.email)
+            return res.redirect('/profile');
+            
     const {username, passwd, passwd_confirm, email, email_confirm} = req.body;
     if(!username || !passwd || !email || !passwd_confirm || !email_confirm)
         return res.render('pages/signup', {data: {title: 'Login', data: '', err: "You must fill all fields."}});
@@ -14,9 +18,10 @@ exports.createUser = async (req,res)=>{
     
     let senha = await bcrypt.hash(passwd,8);
     let path_bunker =  `./uploads/${username}_${email.substring(0,3)}`;
+    let passwd_bunker = crypto.randomBytes(20).toString('hex');
     fs.mkdir(path_bunker, (err)=>{if(err) console.log(err)});
-
-    await User.create({username, passwd: senha, email, path_bunker})
+   
+    await User.create({username, passwd: senha, email, path_bunker, passwd_bunker})
     .then(data=>{res.render('pages/login', {data: {title: 'Login', data: '', err: "", success: "Your account was created, try it now!"} })})
     .catch(err=>{res.status(500).json({status: "error", message: err||"Something went wrong while creating the new user."})});
 }
@@ -38,7 +43,7 @@ exports.validateLogin = async (req, res) => {
         })
         
         if(!usr)
-            return res.render('pages/login', {data: {title: 'Login', data: '', err: "This account doesn't exist. Create a new one!"}});
+            return res.render('pages/login', {data: {title: 'Login', data: '', err: "This account doesn't exist."}});
   
         if(await bcrypt.compare(passwd, usr.passwd)){
             let sess = req.session;
