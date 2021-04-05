@@ -1,4 +1,4 @@
-// const jwt = require('jsonwebtoken');
+// This Controller will manage the Guest Functions such as: Login/Sign-up.
 const crypto = require('crypto');
 const fs = require('fs'); 
 const bcrypt = require('bcrypt');
@@ -11,7 +11,7 @@ exports.createUser = async (req,res)=>{
             
     const {username, passwd, passwd_confirm, email, email_confirm} = req.body;
     if(!username || !passwd || !email || !passwd_confirm || !email_confirm)
-        return res.render('pages/signup', {data: {title: 'Login', data: '', err: "You must fill all fields."}});
+        return res.status(400).render('pages/signup', {data: {title: 'Login', data: '', err: "You must fill all fields."}});
        // return res.status(400).json({status: "err",message: "You must fill all these fields: Email, Username and Password."});
     if (passwd != passwd_confirm || email != email_confirm)
         return res.render('pages/signup', {data: {title: 'Login', data: '', err: "The email or password doesn't match."}});
