@@ -1,10 +1,8 @@
 'use strict';
 
-const { query } = require("express");
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const User = queryInterface.createTable('users',{
+    queryInterface.createTable('users',{
       id_user: {
           type: Sequelize.INTEGER, 
           autoIncrement: true,
