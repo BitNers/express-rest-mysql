@@ -1,7 +1,11 @@
-const db = require('../database/models');
+// This controller will manage the User functions: Update informations, send reports, access Bunker.
+
 // const jwt = require('jsonwebtoken');
+const db = require('../database/models');
+const bcrypt = require('bcrypt');
 const MaskData = require('maskdata');
 const getSize = require('get-folder-size');
+const session = require('express-session');
 const User = db.User;
 
 /* function decodeJwt(txt){
@@ -37,7 +41,7 @@ exports.getInfo = async (req,res)=>{
          attributes: {exclude: ['passwd','passwd_bunker']}
         })
          .then(data=>{
-            data.email = MaskData.maskEmail2(data.email, MaskEmailOption);
+            data.MaskedEmail = MaskData.maskEmail2(data.email, MaskEmailOption);
             data.setDataValue("createdAt",  data.createdAt.toLocaleDateString("pt-BR"));
             getSize(data.path_bunker, (err,size)=>{
               if(!err){
@@ -52,4 +56,37 @@ exports.getInfo = async (req,res)=>{
             
           })
           .catch(err=>{res.status(500).json({status: "error", message: `Something went wrong while try to find user by name: ${err}`})});
+}
+
+exports.updatePassword = async (req,res)=>{
+  // Authenticate the User
+  if (req.body._method != "PATCH" || req.session.email != req.params.email)
+    return res.status(405).json({status: "error", message: "Forbidden Method Access."})  
+
+  const {currentPasswd, newPasswd} = req.body;
+
+  // Get the current Password in DB and compare with the sent by user.
+  await User.findOne({
+    where: {email: req.params.email},
+    attributes: ['id_user','email', 'passwd']
+  })
+  .then(data=>{
+  
+    if(!bcrypt.compareSync(currentPasswd, data.passwd))
+      return res.status(400).json({status: "error", message:"Whoops, current password not match."})
+  
+  // Compare if User is trying to update the password with the current password in DB
+    if(bcrypt.compareSync(newPasswd, data.passwd))
+      return res.status(400).json({status: "error", message:"Whoops, you are trying to update with the same password."})
+    
+    let newPass = bcrypt.hashSync(newPasswd, 8)
+
+    data.update({passwd: newPass},{where: {id_user: data.id_user}})
+    res.redirect('/profile')
+  })
+  .catch(err=>{res.status(500).json({status: "error", message:  `Something went wrong while try to update your password: ${err}`})})
+
+}
+exports.updateEmail = async (req,res)=>{
+    res.json(req.params.body);
 }
