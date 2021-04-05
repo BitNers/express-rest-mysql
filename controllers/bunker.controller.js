@@ -1,6 +1,4 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-
+// This Controller will manage the Bunker functions.
 const fs = require('fs');
 const db = require('../database/models');
 const User = db.User;
@@ -18,11 +16,7 @@ exports.getBunker = async (req,res)=>{
           exclude: ['passwd']}})
        .then(data=>{
 
-         const def = fs.readdirSync(rootPath+`\\${data.path_bunker}`, (err,files)=>{
-            if(!err)
-               return files;
-         });
-         data.setDataValue("userfolder", def);
+       
          //res.json({data});
          res.render('pages/bunker/home', {layout:false, data: {title: "Bunker", data:data}});
        })
