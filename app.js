@@ -14,7 +14,7 @@ const LRU = require('lru-cache');
 
 //Storage
 const multer = require('multer');
-const upload = multer({dest: 'uploads/'});
+multer({dest: 'uploads/'});
 
 // Database & Sessions
 const dbConfig = require('./database/db.config')
@@ -78,6 +78,7 @@ app.use((req, res, next)=>{
 require('./routes/guest.route')(app);
 require('./routes/user.route')(app);
 require('./routes/bunker.route')(app);
+require('./routes/issue.route')(app);
 
 
 app.listen(process.env.PORT, ()=>{console.log(`Running in http://127.0.0.1:${process.env.PORT}`)});
